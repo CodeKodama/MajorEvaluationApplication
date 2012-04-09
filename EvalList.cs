@@ -5,26 +5,26 @@ using System.Text;
 
 namespace MajorEvaluator
 {
-    class CourseList
+    class EvalList
     {
-        private List<Course> allCourses;
+        private List<Eval> allEvals;
         private string name;
 
 
-        public CourseList()
+        public EvalList()
         {
-            allCourses = null;
+            allEvals = null;
         }
 
         public double averageGpa()
         {
             double totalGpa = 0.0;
             double avgGpa = 0.0;
-            foreach (Course c in allCourses)
+            foreach (Eval e in allEvals)
             {
-                totalGpa = totalGpa + c.getGpa();
+                totalGpa = totalGpa + e.getGpa();
             }
-            avgGpa = totalGpa / allCourses.Count();
+            avgGpa = totalGpa / allEvals.Count();
             avgGpa = Math.Round(avgGpa, 2);
             return avgGpa;
         }

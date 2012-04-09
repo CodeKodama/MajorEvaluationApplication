@@ -5,20 +5,33 @@ using System.Text;
 
 namespace MajorEvaluator
 {
-    class Course
+    class Eval
     {
+        
         private int CRN, courseNumber;
         private double gpa;
         private string courseName;
+        private Boolean complete;
         
         /*Constructor sets each course's
         /*members to default values, subject 
         /*to change.*/
-        public Course(){
+        public Eval(){
             CRN = 0;
             courseNumber = 0;
             gpa = 0.0;
             courseName = null;
+            complete = false;
+        }
+
+        public Boolean isComplete()
+        {
+            return complete;
+        }
+
+        public void setBoolean(Boolean complete)
+        {
+            this.complete = complete;
         }
 
         public int getCRN()
