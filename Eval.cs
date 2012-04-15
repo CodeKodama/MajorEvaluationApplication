@@ -7,21 +7,22 @@ namespace MajorEvaluator
 {
     class Eval
     {
-        
-        private int CRN, courseNumber;
+
+        private string CRN, subject, number;
         private double gpa;
-        private string courseName;
+        private int credits;
         private Boolean complete;
         
         /*Constructor sets each course's
         /*members to default values, subject 
         /*to change.*/
         public Eval(){
-            CRN = 0;
-            courseNumber = 0;
+            CRN = null;
+            number = null;
             gpa = 0.0;
-            courseName = null;
+            subject = null;
             complete = false;
+            credits = 0;
         }
 
         public Boolean isComplete()
@@ -29,17 +30,17 @@ namespace MajorEvaluator
             return complete;
         }
 
-        public void setBoolean(Boolean complete)
+        public void setComplete(Boolean complete)
         {
             this.complete = complete;
         }
 
-        public int getCRN()
+        public string getCRN()
         {
             return CRN;
         }
         
-        public void setCRN(int CRN)
+        public void setCRN(string CRN)
         {
             this.CRN = CRN;
         }
@@ -54,24 +55,24 @@ namespace MajorEvaluator
             this.gpa = gpa;
         }
 
-        public string getCourseName()
+        public string getSubject()
         {
-            return courseName;
+            return subject;
         }
 
-        public void setCourseName(string courseName)
+        public void setSubject(string courseSubject)
         {
-            this.courseName = courseName;
+            this.subject = courseSubject;
         }
 
-        public int getCourseNumber()
+        public string getNumber()
         {
-            return courseNumber;
+            return number;
         }
 
-        public void setCourseNumber(int courseNumber)
+        public void setNumber(string courseNumber)
         {
-            this.courseNumber = courseNumber;
+            this.number = courseNumber;
         }
     }
 }

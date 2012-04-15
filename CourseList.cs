@@ -13,7 +13,12 @@ namespace MajorEvaluator
 
         public CourseList()
         {
-            allCourses = null;
+            allCourses = new List<Course>();
+        }
+
+        public void add(Course newCourse)
+        {
+            this.allCourses.Add(newCourse);
         }
 
         public double averageGpa()

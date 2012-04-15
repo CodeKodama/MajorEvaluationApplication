@@ -7,26 +7,48 @@ namespace MajorEvaluator
 {
     class Course
     {
-        private int CRN, courseNumber;
+
+        private string CRN, subject, number, term;
         private double gpa;
-        private string courseName;
+        private int credits;
+        private Boolean complete;
         
         /*Constructor sets each course's
         /*members to default values, subject 
         /*to change.*/
         public Course(){
-            CRN = 0;
-            courseNumber = 0;
+            CRN = null;
+            subject = null;
             gpa = 0.0;
-            courseName = null;
+            number = null;
+            term = null;
         }
 
-        public int getCRN()
+        public Course(string CRN, string courseNumber, double gpa, string courseSubject, string term)
+        {
+            this.term = term;
+            this.CRN = CRN;
+            this.number = courseNumber;
+            this.gpa = gpa;
+            this.subject = courseSubject;
+        }
+
+        public string getTerm()
+        {
+            return term;
+        }
+
+        public void setTerm(string term)
+        {
+            this.term = term;
+        }
+
+        public string getCRN()
         {
             return CRN;
         }
         
-        public void setCRN(int CRN)
+        public void setCRN(string CRN)
         {
             this.CRN = CRN;
         }
@@ -41,24 +63,24 @@ namespace MajorEvaluator
             this.gpa = gpa;
         }
 
-        public string getCourseName()
+        public string getSubject()
         {
-            return courseName;
+            return subject;
         }
 
-        public void setCourseName(string courseName)
+        public void setSubject(string courseSubject)
         {
-            this.courseName = courseName;
+            this.subject = courseSubject;
         }
 
-        public int getCourseNumber()
+        public string getNumber()
         {
-            return courseNumber;
+            return number;
         }
 
-        public void setCourseNumber(int courseNumber)
+        public void setNumber(string courseNumber)
         {
-            this.courseNumber = courseNumber;
+            this.number = courseNumber;
         }
     }
 }
