@@ -7,16 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
 
 namespace MajorEvaluator
 {
-
     public partial class MainWindow : Form
     {
         private string ID;
         private SearchWindow newWindow;
         private CourseList studentCourseList;
         private EvalList majorCourseList;
+        private MajorEvaluation.ReqCourses req_courses;
+
+        
 
         public MainWindow()
         {
@@ -86,11 +89,19 @@ namespace MajorEvaluator
                 }
                 connection.Close();
 
-
+            
 
 
                 MessageBox.Show(studentID);
             }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            MajorEvaluation.Creator popup = new MajorEvaluation.Creator();
+            popup.Show();
+            //popup.Controls.
+            //MessageBox.Show(JsonConvert.SerializeObject(popup.Set_List()).ToString());
         }
     }
 }
