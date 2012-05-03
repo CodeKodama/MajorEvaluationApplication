@@ -9,6 +9,8 @@ namespace MajorEvaluator
     {
         private List<Course> allCourses;
         private string name;
+        private int totalCredits;
+       
 
 
         public CourseList()
@@ -20,6 +22,11 @@ namespace MajorEvaluator
         {
             this.allCourses.Add(newCourse);
         }
+
+       // public int size()
+      //  {
+
+      //  }
 
         public double averageGpa()
         {

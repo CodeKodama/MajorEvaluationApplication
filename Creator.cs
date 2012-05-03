@@ -178,11 +178,14 @@ namespace MajorEvaluation
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             open.ShowDialog();
-            in_file = new StreamReader(open.FileName);
-            requirements = (List<ReqCourses>)JsonConvert.DeserializeObject(in_file.ReadLine(), typeof(List<ReqCourses>));
-            MessageBox.Show(JsonConvert.SerializeObject(requirements).ToString());
-            read_list();
-            in_file.Close();
+            if (open.FileName != "")
+            {
+                in_file = new StreamReader(open.FileName);
+                requirements = (List<ReqCourses>)JsonConvert.DeserializeObject(in_file.ReadLine(), typeof(List<ReqCourses>));
+                MessageBox.Show(JsonConvert.SerializeObject(requirements).ToString());
+                read_list();
+                in_file.Close();
+            }
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)

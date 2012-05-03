@@ -37,6 +37,7 @@ namespace MajorEvaluator
 
         private void button1_Click(object sender, System.EventArgs e)
         {
+            listView1.Items.Clear();
             string SearchTerm = textBox1.Text;
             string MyConString = "SERVER=tcekle.com;" +
                 "DATABASE=dummydb;" +
@@ -68,36 +69,38 @@ namespace MajorEvaluator
 
         private void groupBox1_Enter(object sender, EventArgs e)
         {
-
+            listView1.Items.Clear();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             //First row of all selected entries.
-            ListViewItem tempItem = listView1.SelectedItems[0];
+            if (listView1.SelectedItems.Count > 0)
+            {
 
-            this.ID = tempItem.SubItems[0].Text;
-            this.firstName = tempItem.SubItems[1].Text;
-            this.lastName = tempItem.SubItems[2].Text;
-
-            MessageBox.Show(tempItem.SubItems[1].Text);
-            //tempItem = listView1.SelectedItems[0];
-            //this.lastName = tempItem.Text;
-           // ListViewItem item = listView1.SelectedItems[2];
-           // this.firstName = tempItem.Text;
-
-            this.Close();
+                ListViewItem tempItem = listView1.SelectedItems[0];
+                this.ID = tempItem.SubItems[0].Text;
+                this.firstName = tempItem.SubItems[1].Text;
+                this.lastName = tempItem.SubItems[2].Text;
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Please select a student.");
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-           // this.get
-          //  setStudent("hello");
-            
             this.Close();
         }
 
         private void SearchWindow_Load(object sender, EventArgs e)
+        {
+            listView1.Items.Clear();
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
         {
 
         }

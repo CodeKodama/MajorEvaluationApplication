@@ -8,21 +8,68 @@ namespace MajorEvaluator
     class Eval
     {
 
-        private string CRN, subject, number;
+        private string subject, number, creditType, 
+            replaceSchool, replaceSubject, replaceNumber;
         private double gpa;
-        private int credits;
+        private int credits, replaceCredits;
         private Boolean complete;
+       
+        
         
         /*Constructor sets each course's
         /*members to default values, subject 
         /*to change.*/
         public Eval(){
-            CRN = null;
             number = null;
             gpa = 0.0;
             subject = null;
+            creditType = null;
             complete = false;
             credits = 0;
+            replaceSchool = null;
+            replaceNumber = null;
+            replaceSubject = null;
+            replaceCredits = 0;
+        }
+
+        public string getReplaceSchool()
+        {
+            return replaceSchool;
+        }
+
+        public int getReplaceCredits()
+        {
+            return replaceCredits;
+        }
+
+        public string getReplaceSubject()
+        {
+            return replaceSubject;
+        }
+
+        public string getReplaceNumber()
+        {
+            return replaceNumber;
+        }
+
+        public void setCreditType(string creditType)
+        {
+            this.creditType = creditType;
+        }
+
+        public string getCreditType()
+        {
+            return creditType;
+        }
+
+        public void setCredits(int credits)
+        {
+            this.credits = credits;
+        }
+
+        public int getCredits()
+        {
+            return credits;
         }
 
         public Boolean isComplete()
@@ -33,16 +80,6 @@ namespace MajorEvaluator
         public void setComplete(Boolean complete)
         {
             this.complete = complete;
-        }
-
-        public string getCRN()
-        {
-            return CRN;
-        }
-        
-        public void setCRN(string CRN)
-        {
-            this.CRN = CRN;
         }
 
         public double getGpa()
