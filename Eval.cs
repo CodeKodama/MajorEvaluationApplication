@@ -8,7 +8,7 @@ namespace MajorEvaluator
     class Eval
     {
 
-        private string subject, number, creditType, 
+        private string subject, number, creditType, sequence, 
             replaceSchool, replaceSubject, replaceNumber;
         private double gpa;
         private int credits, replaceCredits;
@@ -26,10 +26,21 @@ namespace MajorEvaluator
             creditType = null;
             complete = false;
             credits = 0;
+            sequence = "No";
             replaceSchool = null;
             replaceNumber = null;
             replaceSubject = null;
             replaceCredits = 0;
+        }
+
+        public void setSequence(String sequence)
+        {
+            this.sequence = sequence;
+        }
+
+        public string getSequence()
+        {
+            return sequence;
         }
 
         public string getReplaceSchool()

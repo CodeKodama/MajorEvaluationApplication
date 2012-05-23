@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+using System.Data.Odbc;
 
 namespace MajorEvaluator
 {
@@ -16,13 +16,15 @@ namespace MajorEvaluator
         private String ID;
         private String lastName;
         private String firstName;
+        private String dsnSource;
 
-        public SearchWindow()
+        public SearchWindow(MainWindow parent)
         {
             InitializeComponent();
             ID = null;
             firstName = null;
             lastName = null;
+            dsnSource= parent.getDSNSource();
         }
 
         public String getId()
@@ -35,50 +37,52 @@ namespace MajorEvaluator
             return (this.lastName + ", " + this.firstName);
         }
 
+        /* queries for all students (IDs, First names, last names)
+         * whose ID numbers contain the values provided by the student W# field
+         * in the current form. */
         private void button1_Click(object sender, System.EventArgs e)
         {
-            listView1.Items.Clear();
-            string SearchTerm = textBox1.Text;
-            string MyConString = "SERVER=tcekle.com;" +
-                "DATABASE=dummydb;" +
-                "UID=remote;" +
-                "PASSWORD=f3erePub;";
-            MySqlConnection connection = new MySqlConnection(MyConString);
-            MySqlCommand command = connection.CreateCommand();
-            MySqlDataReader Reader;
-            command.CommandText = "select ID, FIRST_NAME, LAST_NAME from G_PERSON where ID like '%" + SearchTerm + "%'";
-            connection.Open();
-            Reader = command.ExecuteReader();
-            while (Reader.Read())
+            //Refresh the listview.
+            searchView.Items.Clear();
+            string SearchTerm = searchField.Text;
+            System.Data.Odbc.OdbcConnection connection = new System.Data.Odbc.OdbcConnection(dsnSource);
+            
+            try
             {
-                String id = Reader["ID"].ToString();
-                String fname = Reader["FIRST_NAME"].ToString();
-                String lname = Reader["LAST_NAME"].ToString();
-                ListViewItem item = new ListViewItem(new[] { id, fname, lname });
-                listView1.Items.Add(item);
-                //string[] row1 = { "s1", "s2", "s3" };
-                //listView1.Items.Add("Column1Text").SubItems.AddRange(row1);
-                //ListViewItem lv = new ListViewItem(fname);
-                //lv.SubItems.Add(fname);
-                //lv.SubItems.Add(lname);
-                //listView1.Items.Add(lv);
+                connection.Open();
+                System.Data.Odbc.OdbcCommand command = connection.CreateCommand();
+                command.CommandText = "SELECT ID, FIRST_NAME, LAST_NAME FROM G_PERSON WHERE ID like '%" + SearchTerm + "%'";
+                System.Data.Odbc.OdbcDataReader Reader = command.ExecuteReader();
+                while (Reader.Read())
+                {
+                    String id = Reader["ID"].ToString();
+                    String fname = Reader["FIRST_NAME"].ToString();
+                    String lname = Reader["LAST_NAME"].ToString();
+                    ListViewItem item = new ListViewItem(new[] { id, fname, lname });
+                    searchView.Items.Add(item);
+
+                }
+                connection.Close();
+            } catch (Exception s) {
+                MessageBox.Show("Could not connect at this time. Please try again later.");
+                MessageBox.Show(s.ToString());
             }
-            connection.Close();
         }
 
 
+        /* Clears the SearchWindow's listview everytime a user opens 
+         * this form */
         private void groupBox1_Enter(object sender, EventArgs e)
         {
-            listView1.Items.Clear();
+            searchView.Items.Clear();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //First row of all selected entries.
-            if (listView1.SelectedItems.Count > 0)
+            if (searchView.SelectedItems.Count > 0)
             {
 
-                ListViewItem tempItem = listView1.SelectedItems[0];
+                ListViewItem tempItem = searchView.SelectedItems[0];
                 this.ID = tempItem.SubItems[0].Text;
                 this.firstName = tempItem.SubItems[1].Text;
                 this.lastName = tempItem.SubItems[2].Text;
@@ -97,7 +101,7 @@ namespace MajorEvaluator
 
         private void SearchWindow_Load(object sender, EventArgs e)
         {
-            listView1.Items.Clear();
+            searchView.Items.Clear();
         }
 
         private void groupBox2_Enter(object sender, EventArgs e)

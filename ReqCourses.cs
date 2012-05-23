@@ -11,8 +11,8 @@ namespace MajorEvaluation
         public int COURSE_NUM { get; set; }
         public int CREDITS { get; set; }
         public string REQ_OR_ELEC { get; set; }
-        public int AND { get; set; }
-        public int OR { get; set; }
+        public int VALUE { get; set; }
+        public int PAR_VALUE { get; set; }
 
         public List<MajorEvaluation.ReqCourses> requirements = new List<ReqCourses>();
 
@@ -20,16 +20,15 @@ namespace MajorEvaluation
             int course_num, 
             int credits, 
             string req, 
-            int and, 
-            int or)
+            int value, 
+            int par)
         {
             DEPT = dept;
             COURSE_NUM = course_num;
             CREDITS = credits;
             REQ_OR_ELEC = req;
-            AND = and;
-            OR = or;
-
+            VALUE = value;
+            PAR_VALUE = par;
         }
 
         public override string ToString()
