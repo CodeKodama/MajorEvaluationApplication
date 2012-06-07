@@ -48,6 +48,26 @@ namespace MajorEvaluator
             return replaceSchool;
         }
 
+        public void setReplaceSchool(string school)
+        {
+            replaceSchool = school;
+        }
+
+        public void setReplaceCredits(int credits)
+        {
+            replaceCredits = credits;
+        }
+
+        public void setReplaceSubject(string subject)
+        {
+            replaceSubject = subject;
+        }
+
+        public void setReplaceNumber(string number)
+        {
+            replaceNumber = number;
+        }
+
         public int getReplaceCredits()
         {
             return replaceCredits;

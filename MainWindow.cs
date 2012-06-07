@@ -24,6 +24,7 @@ namespace MajorEvaluator
         private String dsnSource;
         private MajorEvaluation.SeqNode seqRoot;
         private MajorEvaluation.SeqCreator seqWindow;
+        private MajorEvaluation.ClassSubstitute subWindow;
         private int reqUDivCreds;
         private int reqElecCreds;
         private int reqSeqCreds;
@@ -44,6 +45,7 @@ namespace MajorEvaluator
             dsnSource = connectWindow.getDSNSource();
             searchWindow = new SearchWindow(this);
             seqWindow = new MajorEvaluation.SeqCreator();
+            subWindow = new MajorEvaluation.ClassSubstitute();
             reqUDivCreds = 0;
             reqElecCreds = 0;
             reqSeqCreds = 0;
@@ -63,7 +65,7 @@ namespace MajorEvaluator
         {
             uDivCreds.Text = "Upper Division Credits:  " + actualUDivCreds + " / " + reqUDivCreds;
             elecCreds.Text = "Elective Credits:  " + actualElecCreds + " / " + reqElecCreds;
-            seqCreds.Text = "Sequence Credits:  " + actualSeqCreds + " / " + reqSeqCreds;
+            seqCreds.Text = "Math/Sci Credits:  " + actualSeqCreds + " / " + reqSeqCreds;
             if (actualUDivCreds >= reqUDivCreds)
             {
                 uDivCreds.ForeColor = Color.DarkGreen;
@@ -163,7 +165,7 @@ namespace MajorEvaluator
                 if (e.isComplete())
                 {
                     evalItem = new ListViewItem(new[] { course, credits,
-                    gpa, type, repSchool + " " + repName + " " + repNumber, repCredits, "Complete", seq});
+                    gpa, type, repSchool + ", " + repName + " " + repNumber, repCredits, "Complete", seq});
                     evalItem.ForeColor = Color.DarkGreen;
                 }
                 else
@@ -272,6 +274,17 @@ namespace MajorEvaluator
                             actualElecCreds += requirements[i].CREDITS;
                         }
 
+                        if ((requirements[i].DEPT == "M/CS") || (requirements[i].DEPT == "MATH"))
+                        {
+                            actualSeqCreds += requirements[i].CREDITS;
+                        }
+
+                        if ((requirements[i].DEPT == "GEOL") || (requirements[i].DEPT == "BIOL") || (requirements[i].DEPT == "CHEM") || (requirements[i].DEPT == "PHYS"))
+                        {
+                            actualSeqCreds += requirements[i].CREDITS;
+                        }
+
+
                         //IF the class is upper division, add to uDivision count.
                         if (requirements[i].COURSE_NUM >= 300)
                         {
@@ -373,7 +386,80 @@ namespace MajorEvaluator
 
         private void classSubstituteButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Sorry, not yet available!");
+
+           // ListViewItem tempItem = searchView.SelectedItems[0];
+            //this.ID = tempItem.SubItems[0].Text;
+            //this.firstName = tempItem.SubItems[1].Text;
+            //this.lastName = tempItem.SubItems[2].Text;
+
+
+            if (studentCourseList.Count == 0)
+            {
+                MessageBox.Show("Please select a student.");
+            }
+            else if (majEval.evals.Count == 0)
+            {
+                MessageBox.Show("Please open a major. Sequences are generated from a valid JSON file.");
+            }
+            else if (evalView.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Please select a class to replace.");
+            }
+            else
+            {
+                ListViewItem tempItem = evalView.SelectedItems[0];
+                string selectedCourse = tempItem.SubItems[0].Text;
+                subWindow.ShowDialog(this);
+                if (subWindow.isCancelled() == false)
+                {
+                    if (subWindow.repReady())
+                    {
+                        MessageBox.Show("" + selectedCourse);
+                        foreach (Eval thisEval in majEval.evals)
+                        {
+                            if (String.Equals((thisEval.getSubject() + " " + thisEval.getNumber()), selectedCourse))
+                            {
+                                MessageBox.Show("found it");
+                                String repSubject = subWindow.getSubject();
+                                String repNumber = subWindow.getNumber();
+                                String repUniversity = subWindow.getUniversity();
+                                int repCredits = subWindow.getCredits();
+                                thisEval.setReplaceSchool(repUniversity);
+                                thisEval.setReplaceCredits(repCredits);
+                                thisEval.setReplaceNumber(repNumber);
+                                thisEval.setReplaceSubject(repSubject);
+                                thisEval.setComplete(true);
+                                seqRoot.setComplete(thisEval.getSubject(), thisEval.getNumber());
+                                if (thisEval.getCreditType() == "E")
+                                {
+                                    actualElecCreds += repCredits;
+                                }
+                                else if (Convert.ToInt32(repNumber) >= 300)
+                                {
+                                    actualUDivCreds += repCredits;
+                                }
+
+                                if ((thisEval.getSubject() == "MATH") || (thisEval.getSubject() == "M/CS"))
+                                {
+                                    actualSeqCreds += repCredits;
+                                }
+
+                                if ((thisEval.getSubject() == "GEOL") || (thisEval.getSubject() == "PHYS") || (thisEval.getSubject() == "BIOL") || (thisEval.getSubject() == "CHEM"))
+                                {
+                                    actualSeqCreds += repCredits;
+                                }
+                            }
+                        }
+                        updateCreditInfo();
+                        updateListView();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid substituion input. Please try again.");
+                    }
+                }
+            }
+            subWindow.clearFields();
         }
 
         private void reqChangeButton_Click(object sender, EventArgs e)
@@ -517,7 +603,7 @@ namespace MajorEvaluator
 
         private void sequenceButton_Click(object sender, EventArgs e)
         {
-            if (seqRoot.getChildren().Count == 0)
+            if (majEval.evals.Count == 0)
             {
                 MessageBox.Show("Please open a major. Sequences are generated from a valid JSON file.");
             }
@@ -529,6 +615,11 @@ namespace MajorEvaluator
         }
 
         private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void seqCreds_Click(object sender, EventArgs e)
         {
 
         }

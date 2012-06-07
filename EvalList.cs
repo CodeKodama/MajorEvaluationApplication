@@ -7,7 +7,7 @@ namespace MajorEvaluator
 {
     class EvalList
     {
-        private List<Eval> evals;
+        public List<Eval> evals;
         
         private string name;
 

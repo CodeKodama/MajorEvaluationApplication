@@ -295,18 +295,14 @@ namespace MajorEvaluation
                 //If no file has been opened, save new file.
                 else
                 {
-                    save.ShowDialog();
-                    if (!save.FileName.Equals(""))
-                    {
-                        out_file = new StreamWriter(save.FileName);
-                        out_file.WriteLine(uDivCred.Text.ToString());
-                        out_file.WriteLine(elecCred.Text.ToString());
-                        out_file.WriteLine(seqCred.Text.ToString());
-                        out_file.WriteLine(JsonConvert.SerializeObject(requirements).ToString());
-                        out_file.Close();
-                    }
+                    saveToolStripMenuItem_Click(sender, e);
                 }
             }
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
 
     }

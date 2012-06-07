@@ -310,9 +310,10 @@
             this.seqCreds.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.seqCreds.Location = new System.Drawing.Point(7, 67);
             this.seqCreds.Name = "seqCreds";
-            this.seqCreds.Size = new System.Drawing.Size(135, 16);
+            this.seqCreds.Size = new System.Drawing.Size(125, 16);
             this.seqCreds.TabIndex = 21;
-            this.seqCreds.Text = "Sequence Credits:";
+            this.seqCreds.Text = "Math/Sci Credits:";
+            this.seqCreds.Click += new System.EventHandler(this.seqCreds_Click);
             // 
             // totCreds
             // 

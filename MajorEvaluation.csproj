@@ -79,6 +79,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClassSubstitute.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClassSubstitute.Designer.cs">
+      <DependentUpon>ClassSubstitute.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="ReqCourses.cs" />
     <Compile Include="Course.cs" />
@@ -117,6 +123,9 @@
     <Compile Include="SetupDSN.Designer.cs">
       <DependentUpon>SetupDSN.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ClassSubstitute.resx">
+      <DependentUpon>ClassSubstitute.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Creator.resx">
       <DependentUpon>Creator.cs</DependentUpon>
     </EmbeddedResource>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace MajorEvaluation
 {
@@ -123,6 +124,25 @@ namespace MajorEvaluation
             }
         }
 
+
+        public void setComplete(string department, string number)
+        {
+            
+            if (string.Equals((dept + " " + courseNum), (department + " " + number)))
+            {
+                complete = true;
+                MessageBox.Show("found it");
+            }
+
+            else
+            {
+
+                foreach (SeqNode child in children)
+                {
+                    child.setComplete(department, number);
+                }
+            }
+        }
 
         //Searches all SeqNodes descending from the current 
         //SeqNode. If the provided ParentValue is found, it returns

@@ -203,7 +203,7 @@
             // prevSeq
             // 
             this.prevSeq.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.prevSeq.Location = new System.Drawing.Point(618, 27);
+            this.prevSeq.Location = new System.Drawing.Point(621, 27);
             this.prevSeq.Name = "prevSeq";
             this.prevSeq.Size = new System.Drawing.Size(107, 23);
             this.prevSeq.TabIndex = 15;
@@ -215,7 +215,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(205, 31);
+            this.label4.Location = new System.Drawing.Point(200, 31);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(75, 16);
             this.label4.TabIndex = 5;
@@ -225,11 +225,12 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(417, 31);
+            this.label3.Location = new System.Drawing.Point(401, 30);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 16);
+            this.label3.Size = new System.Drawing.Size(79, 16);
             this.label3.TabIndex = 4;
-            this.label3.Text = "Seq. Cr.";
+            this.label3.Text = "Math/Sci Cr.";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label2
             // 
@@ -244,7 +245,7 @@
             // seqCred
             // 
             this.seqCred.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.seqCred.Location = new System.Drawing.Point(478, 27);
+            this.seqCred.Location = new System.Drawing.Point(480, 27);
             this.seqCred.Name = "seqCred";
             this.seqCred.Size = new System.Drawing.Size(99, 22);
             this.seqCred.TabIndex = 2;
@@ -252,7 +253,7 @@
             // elecCred
             // 
             this.elecCred.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.elecCred.Location = new System.Drawing.Point(286, 27);
+            this.elecCred.Location = new System.Drawing.Point(274, 27);
             this.elecCred.Name = "elecCred";
             this.elecCred.Size = new System.Drawing.Size(99, 22);
             this.elecCred.TabIndex = 1;
